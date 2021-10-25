@@ -20,11 +20,11 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from authentication import views as authentication_views
 from django.conf import settings
-
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^$', authentication_views.home, name='home'),
+    path('', RedirectView.as_view(url='catalog/', permanent=True)),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^signup/$', authentication_views.signup, name='signup'),
     url(r'^account_activation_sent/$', authentication_views.account_activation_sent, name='account_activation_sent'),

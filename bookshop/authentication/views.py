@@ -11,7 +11,6 @@ from .forms import SignUpForm
 from .tokens import account_activation_token
 
 
-@login_required
 def home(request):
     return render(request, 'home.html')
 
