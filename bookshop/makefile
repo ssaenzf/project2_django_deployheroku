@@ -11,7 +11,7 @@ CMD = python3 manage.py
 HEROKU = heroku run export SQLITE=1 &
 # Add applications to APP variable as they are
 # added to settings.py file
-APP = catalog  orders
+APP = catalog  orders authentication
 
 server:
 	$(CMD) runserver $(DJANGOPORT)
@@ -50,7 +50,7 @@ create_super_user:
 clear_update_db:
 	@echo del migrations and make migrations and migrate
 	rm -rf */migrations
-	python3 ./manage.py makemigrations $(APP) 
+	python3 ./manage.py makemigrations $(APP)
 	python3 ./manage.py migrate
 
 test_catalog_datamodel:
