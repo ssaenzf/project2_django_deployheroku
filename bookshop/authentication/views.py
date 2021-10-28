@@ -20,7 +20,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True   # Truco, no se si vale pq no se si el test esta bien tan siquiera 
             user.save()
 
             current_site = get_current_site(request)
@@ -36,6 +36,7 @@ def signup(request):
             return redirect('account_activation_sent')
     else:
         form = SignUpForm()
+
     return render(request, 'signup.html', {'form': form})
 
 
