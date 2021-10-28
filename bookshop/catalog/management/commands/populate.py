@@ -65,14 +65,15 @@ class Command(BaseCommand):
         self.comment()
         # check a variable that is unlikely been set out of heroku
         # as DYNO to decide which font directory should be used.
-        # Be aware that your available fonts may be different 
-        # from the ones defined here 
+        # Be aware that your available fonts may be different
+        # from the ones defined here
 
     def cleanDataBase(self):
-        # delete all models stored (clean table)
-        # in database
-        # remove pass and ADD CODE HERE
-        pass
+        User.objects.all().delete()
+        Author.objects.all().delete()
+        Book.objects.all().delete()
+        Comment.objects.all().delete()
+
 
     def user(self):
         " Insert users"
@@ -80,6 +81,9 @@ class Command(BaseCommand):
         pass
 
     def author(self):
+        for i in range self.NUMBERAUTHORS:
+            first_name = faker.first_name()
+            last_name = faker.last_name()
         " Insert authors"
         # remove pass and ADD CODE HERE
         pass
