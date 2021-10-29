@@ -26,6 +26,7 @@ FONTDIR = "/usr/share/fonts/truetype/freefont/FreeMono.ttf"
 # otherwise manage.py will not process it properly
 #
 
+faker = Faker()
 
 class Command(BaseCommand):
     # helps and arguments shown when command python manage.py help populate
@@ -76,17 +77,21 @@ class Command(BaseCommand):
 
 
     def user(self):
-        " Insert users"
-        # remove pass and ADD CODE HERE
-        pass
+        id = 100
+        for i in range (self.NUMBERUSERS):
+            user = User(id=id+i,username=faker.name(),
+                        password=faker.password())
+            user.save()
+
 
     def author(self):
-        for i in range self.NUMBERAUTHORS:
-            first_name = faker.first_name()
-            last_name = faker.last_name()
-        " Insert authors"
-        # remove pass and ADD CODE HERE
-        pass
+        for i in range (self.NUMBERAUTHORS):
+            author = Author()
+            author.id = i
+            author.first_name = faker.first_name()
+            author.last_name = faker.last_name()
+            author.save()
+
 
     def cover(self, book):
         """create fake cover image.
@@ -106,12 +111,28 @@ class Command(BaseCommand):
             book.author.all()[0])[:15], font=fnt, fill=(255, 255, 0))
         img.save(os.path.join(STATIC_PATH, book.path_to_cover_image))
 
+
     def book(self):
-        " Insert books"
-        # remove pass and ADD CODE HERE
-        pass
+        isbn = 1000000000000
+        for i in range (self.NUMBERBOOKS):
+            book = Book()
+            book.id = i
+            book.title = faker.name()
+            book.isbn = str(isbn + i)
+            book.price = faker.random_int(min=1, max=100)
+            book.number_copies_stock = faker.random_int(min=1, max=20)
+            book.date = faker.past_datetime()
+            book.score = faker.random_int(0, 10)
+            book.author = [Author.objects.get(id=faker.random_int(0, self.NUMBERAUTHORS - 1))]
+            book.path_to_cover_image = str(book.id)
+            book.save()
+            # Ultima
+            Cover(book)
+
 
     def comment(self):
-        " Insert comments"
-        # remove pass and ADD CODE HERE
-        pass
+        for i in range (self.NUMBERCOMMENTS):
+            comment.book = Book.objects.get(id=faker.random_int(0, self.NUMBERBOOKS - 1))
+            comment.date = faker.past_datetime()
+            comment.msg = faker.text()
+            comment.user = faker
