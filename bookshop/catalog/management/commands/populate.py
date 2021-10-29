@@ -123,16 +123,22 @@ class Command(BaseCommand):
             book.number_copies_stock = faker.random_int(min=1, max=20)
             book.date = faker.past_datetime()
             book.score = faker.random_int(0, 10)
-            book.author = [Author.objects.get(id=faker.random_int(0, self.NUMBERAUTHORS - 1))]
-            book.path_to_cover_image = str(book.id)
+            author = Author.objects.get(id=faker.random_int(0, self.NUMBERAUTHORS - 1))
+            author.save()
+            book.save()
+            book.author.add(author)
+            book.path_to_cover_image = str(book.id) + ".jpg"
             book.save()
             # Ultima
-            Cover(book)
+            self.cover(book)
+            book.save()
 
 
     def comment(self):
         for i in range (self.NUMBERCOMMENTS):
+            comment = Comment()
             comment.book = Book.objects.get(id=faker.random_int(0, self.NUMBERBOOKS - 1))
             comment.date = faker.past_datetime()
             comment.msg = faker.text()
-            comment.user = faker
+            comment.user = User.objects.get(id=faker.random_int(100, 100 + self.NUMBERUSERS - 1))
+            comment.save()
