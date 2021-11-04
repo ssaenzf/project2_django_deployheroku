@@ -6,10 +6,7 @@
 {% block content %}
 <h1>Homepage</h1>
 
-<form id="buscar" method="get">
-    <input type="text" class="barraBusqueda" name="busqueda" id="busqueda" placeholder="Buscar...">
-    <input type="submit" value="Search" />
-</form>
+
 {% if user.is_authenticated %}
     Hi {{ user.username }}!
     <p><a href="{% url 'logout' %}">Log Out</a></p>
@@ -18,4 +15,5 @@
     <a href="{% url 'login' %}">Log In</a>
     <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
+    <a href="{% url 'search' %}">Search</a>
 {% endblock content %}

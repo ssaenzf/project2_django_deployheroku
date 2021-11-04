@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}
+   Home
+{% endblock %}
+
+{% block content %}
+
+<form id="buscar" method="GET">
+    <input type="text" class="barraBusqueda" name="busqueda" id="busqueda" placeholder="Buscar..." value="{{ request.GET.busqueda }}">
+    <input type="submit" value="Search" />
+</form>
+
+{% endblock content %}
