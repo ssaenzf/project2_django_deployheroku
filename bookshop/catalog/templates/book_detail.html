@@ -1,10 +1,18 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
     <h1>Tittle: {{ book.title }}</h1>
-
-    <p><strong>Author:</strong>{{ book.author }}</p>
+    <img src= "/staticfiles/{{ book.path_to_cover_image }}" alt='imagen del libro' >
+    {% if book.author.all %}
+        {% for a in book.author.all %}
+            <p><strong>Author:</strong>{{ a.first_name }} {{ a.last_name }}</p>
+        {% endfor %}
+    {% endif %}
     <p><strong>Price:</strong> {{book.price }}</p>
     <p><strong>Score:</strong> {{book.score }}</p>
-    <p><strong>Comments:</strong> {{book.comments }}</p>
+    {% if comments %}
+        {% for c in comments.all %}
+            <p><strong>Comment:</strong> User: {{ c.user.username }} Msg: {{ c.msg }} ( {{ c.date }} )</p>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
