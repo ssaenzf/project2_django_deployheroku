@@ -5,9 +5,9 @@
 
 {% block content %}
 
-<form id="buscar" method="GET">
-    <input type="text" class="barraBusqueda" name="busqueda" id="busqueda" placeholder="Buscar..." value="{{ request.GET.busqueda }}">
-    <input type="submit" value="Search" />
+<form id="buscar" action="{% url 'searchedbook' %}" method="GET">
+    <input type="text" name="word" value="" >
+    <input type="submit"/>
 </form>
 
 {% endblock content %}

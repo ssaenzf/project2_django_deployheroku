@@ -1,8 +1,9 @@
 from decimal import Context
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import generic
-from .models import Book, Comment
+from .models import Book, Comment, Author
 from django.db.models import Q
 from .forms import SearchBookForm
 from django.shortcuts import get_object_or_404
@@ -17,18 +18,22 @@ def home(request):
     return render(request, 'home.html', context=context)
 
 def search(request):
-    return render(request, 'search.html')
+    if request.GET.get("word") != "":
+        return redirect(reverse('catalog:searchedbook'))
+    else:
+        print(request.GET.get("word"))
+        return render(request, 'search.html')
 
 class BookListView(generic.ListView):
     model = Book
     template_name = 'book_list.html'
     paginate_by = 5
-
     def get_queryset(self):
-        query = self.request.GET.get("busqueda")
-        print(self.model)
+        query = request.GET.get("word")
         if query:
-            object_list = self.model.objects.filter(title__icontains=query)
+            object_list = Book.objects.filter(title__icontains=query)
+            object_list.extend(Book.objects.filter(author__in=Author.model.objects.filter(first_name__icontains=query)))
+            object_list.extend(Book.objects.filter(author__in=Author.model.objects.filter(last_name__icontains=query)))
         else:
             object_list = self.model.objects.all()
         return object_list
