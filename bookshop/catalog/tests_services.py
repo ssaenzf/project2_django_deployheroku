@@ -93,7 +93,6 @@ class CatalogServiceTests(ServiceBaseTest):
 
     def test03_pagination_is_five(self):
         searchString = 'a'
-        print((reverse(SEARCH_SERVICE) + '?q=%s' % searchString))
         response = self.client1.get(
             reverse(SEARCH_SERVICE) + '?q=%s' % searchString, follow=True)
         self.assertTrue('is_paginated' in response.context)

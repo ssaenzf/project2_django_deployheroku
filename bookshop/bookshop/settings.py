@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'orders.apps.OrdersConfig',
     'authentication.apps.AuthenticationConfig',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -133,6 +135,9 @@ STATIC_URL = '/staticfiles/'
 STATIC_PATH = BASE_DIR / 'staticfiles'
 STATIC_DIR = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR,]
+INTERNAL_IPS = [
+    '127.0.0.1'
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 EMAIL_FILE_PATH = '/tmp/app−messages'
