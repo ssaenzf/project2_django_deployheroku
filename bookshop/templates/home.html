@@ -5,15 +5,22 @@
 
 {% block content %}
 <h1>Homepage</h1>
-
-
-{% if user.is_authenticated %}
-    Hi {{ user.username }}!
-    <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-    <p>You are not logged in</p>
-    <a href="{% url 'login' %}">Log In</a>
-    <a href="{% url 'signup' %}">Sign Up</a>
+{% if book_score %}
+<p> Estos son los 5 libros con mayor score </p>
+<ul>
+  {% for b in book_score %}
+  <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
+  {% endfor %}
+</ul>
 {% endif %}
-    <a href="{% url 'search' %}">Search</a>
+
+{% if book_score %}
+<p> Estos son los 5 libros más recientes </p>
+<ul>
+  {% for b in book_date %}
+  <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
 {% endblock content %}

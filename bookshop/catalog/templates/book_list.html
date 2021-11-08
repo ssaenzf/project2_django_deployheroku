@@ -1,10 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<h2>Book List</h2>
-
+{% if book_list %}
 <ul>
     {% for book in book_list %}
-        <li><strong>{{ book.title }},</strong>{{ book.price }}</li>
+    <li>
+        <h1><a href="{{ book.get_absolute_url }}"> Tittle: {{ book.title }}</a></h1>
+        <img src= "/staticfiles/{{ book.path_to_cover_image }}" alt='imagen del libro' >
+        {% if book.author.all %}
+            {% for a in book.author.all %}
+                <p><strong>Author:</strong>{{ a.first_name }} {{ a.last_name }}</p>
+            {% endfor %}
+        {% endif %}
+        <p><strong>Price:</strong> {{book.price }}</p>
+        <p><strong>Score:</strong> {{book.score }}</p>
+    </li>
     {% endfor %}
 </ul>
+{% else %}
+<p> There are not current books matching the search </p>
+{% endif %}
 {% endblock %}

@@ -18,6 +18,7 @@ from decimal import Decimal
 # define STATIC_PATH in settings.py
 from bookshop.settings import STATIC_PATH
 from PIL import Image, ImageDraw, ImageFont
+from django.utils.timezone import make_aware
 
 
 FONTDIR = "/usr/share/fonts/truetype/freefont/FreeMono.ttf"
@@ -53,7 +54,7 @@ class Command(BaseCommand):
 
         self.NUMBERUSERS = 20
         self.NUMBERBOOKS = 30
-        self.NUMBERAUTHORS = 5
+        self.NUMBERAUTHORS = 6
         self.MAXAUTHORSPERBOOK = 3
         self.NUMBERCOMMENTS = self.NUMBERBOOKS * 5
         self.MAXCOPIESSTOCK = 30
@@ -127,7 +128,7 @@ class Command(BaseCommand):
             author.save()
             book.save()
             book.author.add(author)
-            book.path_to_cover_image = str(book.id) + ".jpg"
+            book.path_to_cover_image = str(i) + ".jpg"
             book.save()
             # Ultima
             self.cover(book)
@@ -138,7 +139,7 @@ class Command(BaseCommand):
         for i in range (self.NUMBERCOMMENTS):
             comment = Comment()
             comment.book = Book.objects.get(id=faker.random_int(0, self.NUMBERBOOKS - 1))
-            comment.date = faker.past_datetime()
+            comment.date = make_aware(faker.past_datetime())
             comment.msg = faker.text()
             comment.user = User.objects.get(id=faker.random_int(100, 100 + self.NUMBERUSERS - 1))
             comment.save()

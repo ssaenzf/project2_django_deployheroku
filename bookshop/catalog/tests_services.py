@@ -12,11 +12,12 @@ from .models import Book as Book
 from .models import Comment as Comment
 
 DETAIL_SERVICE = "detail"
-SEARCH_SERVICE = "search"
+SEARCH_SERVICE = "searchedbook"
 SEARCH_TITLE = "Search"
+DETAIL_TITLE = "Detail"
 
 SERVICE_DEF = {DETAIL_SERVICE: {
-        "title": "",
+        "title": DETAIL_TITLE,
     },
     SEARCH_SERVICE: {
         "title": SEARCH_TITLE,
@@ -92,6 +93,7 @@ class CatalogServiceTests(ServiceBaseTest):
 
     def test03_pagination_is_five(self):
         searchString = 'a'
+        print((reverse(SEARCH_SERVICE) + '?q=%s' % searchString))
         response = self.client1.get(
             reverse(SEARCH_SERVICE) + '?q=%s' % searchString, follow=True)
         self.assertTrue('is_paginated' in response.context)
