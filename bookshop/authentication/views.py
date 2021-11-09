@@ -10,17 +10,12 @@ from django.template.loader import render_to_string
 from .forms import SignUpForm
 from .tokens import account_activation_token
 
-
-def home(request):
-    return render(request, 'home.html')
-
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = True   # Truco, no se si vale pq no se si el test esta bien tan siquiera 
+            user.is_active = True   # Truco, no se si vale pq no se si el test esta bien tan siquiera
             user.save()
 
             current_site = get_current_site(request)
@@ -36,14 +31,13 @@ def signup(request):
             return redirect('account_activation_sent')
     else:
         form = SignUpForm()
-
-    return render(request, 'signup.html', {'form': form})
+        return render(request, 'signup.html', {'form': form})
 
 
 def account_activation_sent(request):
     return render(request, 'account_activation_sent.html')
 
-
+"""
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -59,3 +53,4 @@ def activate(request, uidb64, token):
         return redirect('home')
     else:
         return render(request, 'account_activation_invalid.html')
+"""

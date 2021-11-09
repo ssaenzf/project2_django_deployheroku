@@ -29,13 +29,13 @@ class ListAsQuerySet(list):
     def __init__(self, *args, model, **kwargs):
         self.model = model
         super().__init__(*args, **kwargs)
-
+    """
     def filter(self, *args, **kwargs):
         return self  # filter ignoring, but you can impl custom filter
 
     def order_by(self, *args, **kwargs):
         return self
-
+    """
 
 class BookListView(generic.ListView):
     model = Book
@@ -50,8 +50,7 @@ class BookListView(generic.ListView):
             object_list = set(object_list)
             book_list = list(object_list)
             book_list = ListAsQuerySet(book_list, model=Book)
-        else:
-            book_list = Book.objects.all()
+
         return book_list
 
 def book_detail_view(request, slug):
