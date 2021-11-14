@@ -22,13 +22,16 @@ LOGIN_REDIRECT_URL = '/'
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+7^f1pm1@r0o4b=^2olyp_$7x8kq3q)f)ytkyme-lj2re)#=94'
+# SECRET_KEY = "cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag"
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+#DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+#DEBUG = True
+ALLOWED_HOSTS = ['still-ravine-74857.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -88,12 +91,31 @@ DATABASES = {
     }
 }
 """
+#DATABASES = {
+#    "default": dj_database_url.config(
+#        default="postgres://alumnodb:alumnodb@localhost:5432/psi",
+#        conn_max_age=500)
+#}
+"""
+DATABASES = {}
+if os.getenv('SQLITE', False):
+    DATABASES['default'] = {
+     'ENGINE': 'django.db.backends.sqlite3',
+     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     }
+else:
+    DATABASES['default'] = dj_database_url.config(default='postgres://alumnodb:alumnodb@localhost:5432/psi', conn_max_age=500)  # noqa
+"""
 DATABASES = {
     "default": dj_database_url.config(
         default="postgres://alumnodb:alumnodb@localhost:5432/psi",
         conn_max_age=500)
 }
-
+if os.getenv("SQLITE", False):
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -130,11 +152,11 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/staticfiles/'
-#STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_PATH = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_DIR = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [STATIC_DIR,]
+STATICFILES_DIRS = [STATIC_PATH,]
 INTERNAL_IPS = [
     '127.0.0.1'
 ]
@@ -143,3 +165,7 @@ INTERNAL_IPS = [
 EMAIL_FILE_PATH = '/tmp/app−messages'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

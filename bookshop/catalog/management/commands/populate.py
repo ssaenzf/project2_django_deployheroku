@@ -139,7 +139,7 @@ class Command(BaseCommand):
         for i in range (self.NUMBERCOMMENTS):
             comment = Comment()
             comment.book = Book.objects.get(id=faker.random_int(0, self.NUMBERBOOKS - 1))
-            comment.date = make_aware(faker.past_datetime())
+            comment.date = faker.past_datetime()
             comment.msg = faker.text()
             comment.user = User.objects.get(id=faker.random_int(100, 100 + self.NUMBERUSERS - 1))
             comment.save()
