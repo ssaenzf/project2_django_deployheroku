@@ -20,16 +20,21 @@ class AdditionalTests(TestCase):
             print('Something went wrong in the populate() function :-(')
             raise
 
-    """ Test para comprobar que se crean los objetos profile correctamente """
     def test_profile(self):
+        """
+        Test para comprobar que se crean los objetos profile correctamente
+        AUTOR: Carolina Monedero
+        """
         user = User.objects.get(id=101)
         profile = Profile.objects.filter(user__in=User.objects.filter(id=101))[0] # noqa
         profile.__str__()
         self.assertEquals(profile.user, user)
 
-    """ Test para comprobar pantalla signup """
     def test_signup(self):
-        """ Usuario sin registrar, por lo que podre comprobar signup """
+        """
+        Test para comprobar pantalla signup
+        AUTOR: Carolina Monedero
+        """
         self.client = Client()
         response = self.client.get(reverse('signup'))
         self.assertTemplateUsed(response, 'signup.html')

@@ -8,6 +8,11 @@ from .tokens import account_activation_token
 
 
 def signup(request):
+    """
+    Esta clase implementa la vista de la pagina
+    signup.html de registro de un usuario
+    AUTOR: Santos Saenz
+    """
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -32,6 +37,13 @@ def signup(request):
 
 
 def account_activation_sent(request):
+    """
+    Esta función implementa la vista de la pagina
+    account_activation_sent.html
+    que solo se redirigirá a ella si la cuenta se 
+    ha creado correctamente
+    AUTOR: Santos Saenz
+    """
     return render(request, 'account_activation_sent.html')
 
 

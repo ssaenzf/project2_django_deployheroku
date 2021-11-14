@@ -6,7 +6,10 @@ from django.template.defaultfilters import slugify
 
 
 class Author(models.Model):
-    """Model representing an author."""
+    """
+    Model representing an author.
+    AUTOR: Santos Saenz
+    """
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
@@ -22,7 +25,10 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    """Model representing a book """
+    """
+    Model representing a book
+    AUTOR: Santos Saenz
+    """
     title = models.CharField(max_length=100)
     helptext2 = '13 Character <a href="https://www.isbn-international.org'
     isbn = models.CharField('ISBN', max_length=13, unique=True,
@@ -56,6 +62,10 @@ class Book(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Model representing a comment
+    AUTOR: Santos Saenz
+    """
 
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

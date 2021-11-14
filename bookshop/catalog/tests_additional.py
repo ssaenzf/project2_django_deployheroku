@@ -21,9 +21,12 @@ class AdditionalTests(TestCase):
             print('Something went wrong in the populate() function :-(')
             raise
 
-    """ Test para comprobar que si introducimos libros con score incorrectos estos
-    se actualizan a scores correctos """
     def test_book_score(self):
+        """
+        Test para comprobar que si introducimos libros con score incorrectos estos
+        se actualizan a scores correctos 
+        AUTOR: Santos Saenz
+        """
         faker = Faker()
         # Score negativo
         book1 = Book()
@@ -57,16 +60,21 @@ class AdditionalTests(TestCase):
         book2.save()
         self.assertTrue(book2.score == 10)
 
-    """ Test para comprobar vista del home page """
     def test_home_page(self):
-
+        """
+        Test para comprobar vista del home page 
+        AUTOR: Santos Saenz
+        """
         self.client = Client()
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'home.html')
 
-    """ Test para comprobar vista del search page """
-    def test_search_page(self):
 
+    def test_search_page(self):
+        """
+        Test para comprobar vista del search page 
+        AUTOR: Santos Saenz
+        """
         self.client = Client()
         response = self.client.get(reverse('search'))
         self.assertTemplateUsed(response, 'search.html')

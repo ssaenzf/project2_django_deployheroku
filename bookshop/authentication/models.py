@@ -7,6 +7,10 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
+    """
+    Model representing a profile.
+    AUTOR: Santos Saenz
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email_confirmed = models.BooleanField(default=False)
 
@@ -17,6 +21,11 @@ class Profile(models.Model):
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
+    """
+    Funcion que actualiza el perfil
+    de un usuario determinado.
+    AUTOR: Santos Saenz
+    """
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
