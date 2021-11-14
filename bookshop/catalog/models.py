@@ -1,9 +1,7 @@
 from django.db import models
 from django.urls import reverse
 # Used to generate URLs by reversing the URL patterns
-import uuid  # Required for unique book instances
 from django.contrib.auth.models import User
-from datetime import date
 from django.template.defaultfilters import slugify
 
 
@@ -50,7 +48,7 @@ class Book(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return "Titulo: " + self.title + " Score: " + str(self.score) + " Date: " + str(self.date)
+        return "Titulo: " + self.title + " Score: " + str(self.score) + " Date: " + str(self.date) # noqa
 
     def get_absolute_url(self):
         """Returns the url to access a detail record for this book."""

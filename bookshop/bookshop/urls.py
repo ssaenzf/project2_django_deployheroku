@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 from django.urls import path
-from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from authentication import views as authentication_views
 from django.conf import settings
@@ -30,10 +29,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='catalog/', permanent=True)),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^signup/$', authentication_views.signup, name='signup'),
-    url(r'^account_activation_sent/$', authentication_views.account_activation_sent, name='account_activation_sent'),
-    #path('activate/<uidb64>/<token>/', authentication_views.activate, name='activate'),
-    #url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-    #    authentication_views.activate, name='activate'),
+    url(r'^account_activation_sent/$', authentication_views.account_activation_sent, name='account_activation_sent'), # noqa
     path('orders/', include('orders.urls')),
     path('catalog/', include('catalog.urls')),
     path('authentication/', include('authentication.urls')),

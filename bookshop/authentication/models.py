@@ -14,6 +14,7 @@ class Profile(models.Model):
         """String for representing the Model object."""
         return self.user.__str__()
 
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:

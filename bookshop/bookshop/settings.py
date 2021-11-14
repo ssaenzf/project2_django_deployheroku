@@ -21,16 +21,11 @@ LOGIN_REDIRECT_URL = '/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag"
-
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')  # noqa
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-#DEBUG = True
+# DEBUG = True
 ALLOWED_HOSTS = ['still-ravine-74857.herokuapp.com', '127.0.0.1']
 
 # Application definition
@@ -91,11 +86,11 @@ DATABASES = {
     }
 }
 """
-#DATABASES = {
+# DATABASES = {
 #    "default": dj_database_url.config(
 #        default="postgres://alumnodb:alumnodb@localhost:5432/psi",
 #        conn_max_age=500)
-#}
+# }
 """
 DATABASES = {}
 if os.getenv('SQLITE', False):
@@ -121,16 +116,16 @@ if os.getenv("SQLITE", False):
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # noqa
     },
 ]
 
@@ -156,7 +151,7 @@ STATIC_URL = '/static/'
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_DIR = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [STATIC_PATH,]
+STATICFILES_DIRS = [STATIC_PATH, ]
 INTERNAL_IPS = [
     '127.0.0.1'
 ]

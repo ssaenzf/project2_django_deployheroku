@@ -1,16 +1,16 @@
 # created by R. Marabini on mar ago 17 14:11:42 CEST 2021
 from decimal import Decimal
 from django.test import TestCase
-
-###################
-# You may modify the following variables
 from bookshop.settings import BASE_DIR
-
-pathToProject = BASE_DIR
 from .models import Author as Author
 from .models import Book as Book
 from .models import User as User
 from .models import Comment as Comment
+
+###################
+# You may modify the following variables
+
+pathToProject = BASE_DIR
 
 
 # Please do not modify anything below this line

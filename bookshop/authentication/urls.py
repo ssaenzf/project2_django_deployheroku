@@ -1,5 +1,5 @@
-from django.conf.urls import url
-from . import views
+from django.conf.urls import url # noqa
+from . import views # noqa
 
 urlpatterns = [
 ]

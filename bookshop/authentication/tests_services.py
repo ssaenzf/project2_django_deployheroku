@@ -35,6 +35,7 @@ SERVICE_DEF = {
 
 NUMBERUSERS = 5
 
+
 class ServiceBaseTest(TestCase):
     """The database transaction that is being used by
     django.test.TestCase can be avoided by inheriting

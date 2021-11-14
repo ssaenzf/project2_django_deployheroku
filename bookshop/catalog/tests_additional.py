@@ -1,7 +1,6 @@
-import sys
 from django.test import TestCase
 
-from catalog.models import Book, Comment, Author
+from catalog.models import Book, Author
 from faker import Faker
 from django.test import Client
 from django.urls import reverse
@@ -50,7 +49,7 @@ class AdditionalTests(TestCase):
         book2.number_copies_stock = faker.random_int(min=1, max=20)
         book2.date = faker.past_datetime()
         book2.score = 11
-        author2 = Author.objects.get(id=2)
+        author2 = Author.objects.get(id=2) # noqa
 
         book2.save()
         book2.author.add(author1)
