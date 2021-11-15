@@ -1,3 +1,3 @@
-from django.test import TestCase
-
-# Create your tests here.
+from orders.tests_models import * # noqa
+from orders.tests_cart import * # noqa
+from orders.tests_services import * # noqa
