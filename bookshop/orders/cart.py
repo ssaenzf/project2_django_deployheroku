@@ -4,7 +4,8 @@ from catalog.models import Book
 
 
 class Cart(object):
-    
+
+
     def __init__(self , request):
         """
         Initialize the cart.
@@ -32,6 +33,7 @@ class Cart(object):
                 CART_SESSION_ID] = {}
         self.cart = cart
 
+
     def add(self , book , quantity=1, update_quantity=False):
         """
         Add a book to the cart or update quantity if
@@ -50,6 +52,29 @@ class Cart(object):
         """
         book_id = str(book.id)
         # your code goes here
+
+        # Se obtiene la sesion
+        self.session = request.session
+
+        # Se obtiene copia de cart ya que al parecer sino falla ya que session
+        # no es un diccionario apropiado
+        cart = self.session.get(settings.
+            CART_SESSION_ID)
+
+        # Si esta activado actualzar la nueva quiantity se sumará a la antigua
+        # quantity
+        if update_quantity == True:
+            # si existe el carro se procede normal ya que si se puede actualizar
+            if cart[book_id]:
+                cart[book_id]['quantity'] = cart[book_id]['quantity'] + quantity
+                cart[book_id]['price'] = cart[book_id]['price'] + book.price    #OJOOOO
+            else:
+                printf("Error, se esta intentando actualizar un carro que no existe")
+        else:
+            cart[book_id] = {'quantity': quantity, 'price': str(book.price)}    #OJOOO
+
+        # Se guarda la copia de cart modificada y la sesion
+        self.cart = cart
         # end of your code goes here
         self.save()
 

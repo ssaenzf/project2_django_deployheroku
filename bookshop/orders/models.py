@@ -29,4 +29,4 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     price = models.DecimalField(null=False, max_digits=7, decimal_places=2)
-    quantity = models.IntegerField(null=False)
+    quantity = models.IntegerField(null=False, default=0)
