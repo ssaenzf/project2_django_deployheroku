@@ -23,7 +23,7 @@ LOGIN_REDIRECT_URL = '/'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')  # noqa
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-
+CART_SESSION_ID = None
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 ALLOWED_HOSTS = ['still-ravine-74857.herokuapp.com', '127.0.0.1']
@@ -151,7 +151,7 @@ STATIC_URL = '/static/'
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_DIR = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [STATIC_PATH, ]
+STATICFILES_DIRS = [STATIC_PATH,]
 INTERNAL_IPS = [
     '127.0.0.1'
 ]

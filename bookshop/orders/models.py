@@ -1,5 +1,7 @@
 from django.db import models
-from bookshop.catalog.models import Book
+from catalog.models import Book
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Order(models.Model):
@@ -21,7 +23,7 @@ class Order(models.Model):
             self.created = timezone.now()
         self.updated = timezone.now()
 
-        return super(User, self).save(*args, **kwargs)
+        return super(Order, self).save(*args, **kwargs)
 
 
 class OrderItem(models.Model):
