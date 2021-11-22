@@ -64,6 +64,7 @@ test_authentication_services:
 
 test_orders_cart:
 	$(CMD) test orders.tests_cart --keepdb
+	$(CMD) test orders.tests_models --keepdb
 
 # other commands that may be useful but require tuning
 #test_heroku:

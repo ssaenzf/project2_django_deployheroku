@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from . import cart
+from django.contrib.auth.decorators import login_required
 from orders import forms
 from catalog.models import Book
 
@@ -24,3 +25,10 @@ def cart_add(request, book_slug):
 
 class cartView():
     pass
+
+@login_required
+def cart_remove(request , book_slug):
+    book = Book.objects.filter(slug__exact=book_slug)
+    cart = Cart(request)
+    cart.remove(book)
+    return redirect ("cart_list")   # Esto hay que ver
