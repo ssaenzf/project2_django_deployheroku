@@ -24,17 +24,15 @@ class Cart(object):
         # from the same client
 
         self.session = request.session
-        cart = self.session.get(settings.
-            CART_SESSION_ID)
+        cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             # If there is no cart create an empty one
             # and save it in the session
-            cart = self.session[settings.
-                CART_SESSION_ID] = {}
+            cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
 
-    def add(self , book , quantity=1, update_quantity=False):
+    def add(self , book , quantity=1, update_quantity=True):
         """
         Add a book to the cart or update quantity if
         book exists. Note , use strings as keys of the
@@ -53,9 +51,6 @@ class Cart(object):
         book_id = str(book.id)
         # your code goes here
 
-        # Se obtiene la sesion
-        self.session = request.session
-
         # Se obtiene copia de cart ya que al parecer sino falla ya que session
         # no es un diccionario apropiado
         cart = self.session.get(settings.
@@ -65,15 +60,15 @@ class Cart(object):
         # quantity
         if update_quantity == True:
             # si existe el carro se procede normal ya que si se puede actualizar
-            if cart[book_id]:
+            if cart.get(book_id) is not None:
                 cart[book_id]['quantity'] = cart[book_id]['quantity'] + quantity
-                cart[book_id]['price'] = cart[book_id]['price'] + book.price    #OJOOOO
+                cart[book_id]['price'] = str(book.price)
             else:
-                printf("Error, se esta intentando actualizar un carro que no existe")
+                cart[book_id] = {'quantity': quantity, 'price': str(book.price)}
         else:
-            cart[book_id] = {'quantity': quantity, 'price': str(book.price)}    #OJOOO
+            cart[book_id] = {'quantity': quantity, 'price': str(book.price)}
 
-        # Se guarda la copia de cart modificada y la sesion
+        # Se guarda la copia de cart modificada en la sesion
         self.cart = cart
         # end of your code goes here
         self.save()
@@ -98,6 +93,23 @@ class Cart(object):
         Remove a book from the cart.
         """
         # your code goes here
+        book_id = str(book.id)
+        # your code goes here
+
+        # Se obtiene copia de cart ya que al parecer sino falla ya que session
+        # no es un diccionario apropiado
+        cart = self.session.get(settings.
+            CART_SESSION_ID)
+
+        if cart[book_id]:
+            del cart[book_id]
+        else:
+            printf("Se esta intentando eliminar un libro que no existe")
+
+        # Se guarda la copia de cart modificada en la sesion
+        self.cart = cart
+        # end of your code goes here
+        self.save()
         # endyourcode
 
 
@@ -120,29 +132,30 @@ class Cart(object):
         # get the book objects and add them to the cart
         books = Book.objects.filter(id__in=book_ids)
         for book in books:
-            self.cart[str(book.id)][’book’] = book
+            self.cart[str(book.id)]['book'] = book
         for item in self.cart.values ():
-            # since ’price’ is stored as string cast it
-            to ’decimal ’
-            item[’price’] = Decimal(item[’price’])
-            item[’total_price ’] = item[’price’] * item[
-            ’quantity ’]
+            # since ’price’ is stored as string cast it to ’decimal ’
+            item['price'] = Decimal(item['price'])
             yield item
 
 
     def __len__(self):
         """
-        return the number of items in the cart. That is
-        , the sum of
-        the quantities of each book in the cart. If the
-        user
+        return the number of items in the cart. That is, the sum of
+        the quantities of each book in the cart. If the user
         wants to buy 2 copies of book with id=1 and 4
-        copies of
-        book with id=2
+        copies of book with id=2
         __len__ () should return 6
         """
         # your code goes here
+        quantity = 0
+        # Se itera sobre los valores y se ira obteniendo el quantity
+        for item in self.cart.values ():
+            quantity = quantity + item['quantity']
+
+        return quantity
         # endyourcode
+
 
     def get_total_price(self):
         """
@@ -150,7 +163,14 @@ class Cart(object):
         in the cart
         """
         # your code goes here
+        price = 0
+        for item in self.cart.values ():
+            price = price + (Decimal(item['price']) * item['quantity'])
+
+        return price
         # endyourcode
+
+
     def clear(self):
         # remove cart from session
         del self.session[settings.CART_SESSION_ID]

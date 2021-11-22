@@ -1,5 +1,7 @@
 from django.db import models
-from bookshop.catalog.models import Book
+from catalog.models import Book
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Order(models.Model):
@@ -14,6 +16,12 @@ class Order(models.Model):
     updated = models.DateTimeField()
     paid = models.BooleanField(default = False)
 
+    def get_total_cost(self):
+        order_items = OrderItem.objects.filter(order=self)
+        cost = 0
+        for item in order_items:
+            cost = cost + item.get_total_cost()
+        return cost
 
     def save(self, *args, **kwargs):
         ''' On save or update timestamps '''
@@ -21,7 +29,7 @@ class Order(models.Model):
             self.created = timezone.now()
         self.updated = timezone.now()
 
-        return super(User, self).save(*args, **kwargs)
+        return super(Order, self).save(*args, **kwargs)
 
 
 class OrderItem(models.Model):
@@ -30,3 +38,10 @@ class OrderItem(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     price = models.DecimalField(null=False, max_digits=7, decimal_places=2)
     quantity = models.IntegerField(null=False, default=0)
+
+    def get_total_cost(self):
+        return self.price * self.quantity
+
+    # Cada vez que guarda se guardan estos order items en una lista de items
+    # para su order correspondiente
+    #def save(self, *args, **kwargs):

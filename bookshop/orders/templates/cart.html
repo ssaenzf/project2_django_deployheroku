@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Shopping Cart</h1>
+    {% if cart %}
+    <table>
+        {% for item in cart.__iter__ %}
+            {% if item==book %}
+                <tr>
+                    <th>Title: {{item.title}}</th>
+                    <th>Price: {{item.price}}</th>
+                    <th>Quantity: {{units}}</th>
+                    <th>Total Price (€): {{item.price}}</th>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endblock %}
