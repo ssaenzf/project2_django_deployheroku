@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'orders.apps.OrdersConfig',
     'authentication.apps.AuthenticationConfig',
-    'debug_toolbar'
+    #'debug_toolbar'
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

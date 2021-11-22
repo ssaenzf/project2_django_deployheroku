@@ -14,17 +14,11 @@
       <a href="{% url 'home' %}"> Homepage</a>
       {% if user.is_authenticated %}
       <a href="{% url 'logout' %}"> Log Out</a>
-      {% if cart|length > 0 %}
-      <a href="{% url 'cart' %}">{% cart|__len__ %} {% cart|get_total_price %}</a>
-      {% else  %}
-      <a href="{% url 'cart' %}">this cart is empty</a>
-      {% endif %}
       {% else %}
       <a href="{% url 'signup' %}">Sign Up</a>
       <a href="{% url 'login' %}"> Log In</a>
       {% endif %}
       <a href="{% url 'search' %}">Search</a>
-      <a href="{% url 'cart_list' %}"> Cart</a>
       <hr>
       {% endblock %}
       {% block content %}

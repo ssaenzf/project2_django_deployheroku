@@ -4,14 +4,12 @@
     {% if cart %}
     <table>
         {% for item in cart.__iter__ %}
-            {% if item==book %}
-                <tr>
-                    <th>Title: {{item.title}}</th>
-                    <th>Price: {{item.price}}</th>
-                    <th>Quantity: {{units}}</th>
-                    <th>Total Price (€): {{item.price}}</th>
-                </tr>
-            {% endif %}
+          <tr>
+              <th>Title: {{item.title}}</th>
+              <th>Price: {{item.price}}</th>
+              <th>Quantity: {{units}}</th>
+              <th>Total Price (€): {{item.price}}</th>
+          </tr>
         {% endfor %}
     </table>
     {% endif %}
