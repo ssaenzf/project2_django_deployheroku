@@ -7,4 +7,4 @@ def cart_remove(request , book_slug):
     book = Book.objects.filter(slug__exact=book_slug)
     cart = Cart(request)
     cart.remove(book)
-    return redirect ("cart_list")
+    return redirect ("cart_list")   # Esto hay que ver
