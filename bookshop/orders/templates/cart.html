@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Shopping Cart</h1>
-    {% if cart %}
+    {% if items %}
     <table>
-        {% for item in cart.__iter__ %}
+        {% for item in items %}
           <tr>
               <th>Title: {{item.title}}</th>
               <th>Price: {{item.price}}</th>
-              <th>Quantity: {{units}}</th>
-              <th>Total Price (€): {{item.price}}</th>
+              <th>Quantity: {{item.quantity}}</th>
+              <th>Total Price (€): {{item.total_price}}</th>
           </tr>
         {% endfor %}
+        <p> Precio total {{ total_price }} </p>
     </table>
+    {% else %}
+    <p> No hay elementos en el carrito </p>
     {% endif %}
 {% endblock %}

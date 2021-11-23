@@ -14,11 +14,12 @@ def cart_add(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
 
     query = request.POST.get('quantity')
-    print(query)
     if query:
         carro.add(book, query, True)
+        items = carro.__iter__()
         carro.save()
-        return render(request, 'cart.html', context={'cart': carro})
+        total_price = carro.get_total_price()
+        return render(request, 'cart.html', context={'items':items, 'total_price':total_price})
 
     else:
         return redirect(book.get_absolute_url)

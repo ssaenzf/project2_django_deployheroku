@@ -30,6 +30,7 @@ class Cart(object):
             # and save it in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+        self.save()
 
 
     def add(self , book , quantity=1, update_quantity=True):
@@ -53,22 +54,24 @@ class Cart(object):
 
         # Se obtiene copia de cart ya que al parecer sino falla ya que session
         # no es un diccionario apropiado
-        cart = self.session.get(settings.
-            CART_SESSION_ID)
-
-        # Si esta activado actualzar la nueva quiantity se sumará a la antigua
+        cart = self.session.get(settings.CART_SESSION_ID)
+        print(cart)
+        # Si esta activado actualzar la nueva quantity se sumará a la antigua
         # quantity
         if update_quantity == True:
             # si existe el carro se procede normal ya que si se puede actualizar
             if cart.get(book_id) is not None:
-                cart[book_id]['quantity'] = cart[book_id]['quantity'] + quantity
+                if cart[book_id]['quantity'] is not None:
+                    cart[book_id]['quantity'] = cart[book_id]['quantity'] + int(quantity)
+                else:
+                    cart[book_id]['quantity'] = int(quantity)
+
                 cart[book_id]['price'] = str(book.price)
             else:
                 cart[book_id] = {'quantity': quantity, 'price': str(book.price)}
         else:
             cart[book_id] = {'quantity': quantity, 'price': str(book.price)}
 
-        # Se guarda la copia de cart modificada en la sesion
         self.cart = cart
         # end of your code goes here
         self.save()
@@ -98,8 +101,7 @@ class Cart(object):
 
         # Se obtiene copia de cart ya que al parecer sino falla ya que session
         # no es un diccionario apropiado
-        cart = self.session.get(settings.
-            CART_SESSION_ID)
+        cart = self.session.get(settings.CART_SESSION_ID)
 
         if cart[book_id]:
             del cart[book_id]
@@ -122,20 +124,23 @@ class Cart(object):
             cart and object
         of type book. This will help us to create
             templates showing
-        the book title. We can not add a book object inthe method
+        the book title. We can not add a book object int he method
         "add" becose self.cart is saved at the end of
         the function and a session variable cannot
         be complex , it can only store numbers and
         strings but not object with pointers.
         """
         book_ids = self.cart.keys()
+        print(book_ids)
         # get the book objects and add them to the cart
         books = Book.objects.filter(id__in=book_ids)
         for book in books:
-            self.cart[str(book.id)]['book'] = book
+            self.cart[str(book.id)]['title'] = book.title
+
         for item in self.cart.values ():
             # since ’price’ is stored as string cast it to ’decimal ’
-            item['price'] = Decimal(item['price'])
+            item['price'] = float(item['price'])
+            item['total_price'] = float(Decimal(item['price']) * int(item['quantity']))
             yield item
 
 
@@ -165,7 +170,7 @@ class Cart(object):
         # your code goes here
         price = 0
         for item in self.cart.values ():
-            price = price + (Decimal(item['price']) * item['quantity'])
+            price = price + (Decimal(item['price']) * int(item['quantity']))
 
         return price
         # endyourcode
