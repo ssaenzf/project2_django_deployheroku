@@ -17,7 +17,6 @@ def cart_add(request, book_slug):
     if query:
         carro.add(book, query, True)
         items = carro.__iter__()
-        carro.save()
         total_price = carro.get_total_price()
         return render(request, 'cart.html', context={'items':items, 'total_price':total_price})
 

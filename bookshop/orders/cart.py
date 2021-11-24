@@ -26,9 +26,14 @@ class Cart(object):
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
+            print("NO HAY CARRO")
+            print(self.session.get(settings.CART_SESSION_ID))
             # If there is no cart create an empty one
             # and save it in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
+        else:
+            print("HAY CARRO")
+            print(self.session.get(settings.CART_SESSION_ID))
         self.cart = cart
         self.save()
 
@@ -55,7 +60,6 @@ class Cart(object):
         # Se obtiene copia de cart ya que al parecer sino falla ya que session
         # no es un diccionario apropiado
         cart = self.session.get(settings.CART_SESSION_ID)
-        print(cart)
         # Si esta activado actualzar la nueva quantity se sumará a la antigua
         # quantity
         if update_quantity == True:
@@ -131,7 +135,6 @@ class Cart(object):
         strings but not object with pointers.
         """
         book_ids = self.cart.keys()
-        print(book_ids)
         # get the book objects and add them to the cart
         books = Book.objects.filter(id__in=book_ids)
         for book in books:
