@@ -26,14 +26,9 @@ class Cart(object):
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
-            print("NO HAY CARRO")
-            print(self.session.get(settings.CART_SESSION_ID))
             # If there is no cart create an empty one
             # and save it in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
-        else:
-            print("HAY CARRO")
-            print(self.session.get(settings.CART_SESSION_ID))
         self.cart = cart
         self.save()
 

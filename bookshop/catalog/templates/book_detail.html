@@ -15,7 +15,7 @@
             <p><strong>Comment:</strong> User: {{ c.user.username }} Msg: {{ c.msg }} ( {{ c.date }} )</p>
         {% endfor %}
     {% endif %}
-    <form id = "anyadirCarrito" action="{% url 'cart_list' book_slug=book.slug %}" method="POST">
+    <form id = "anyadirCarrito" action="{% url 'cart_add' book_slug=book.slug %}" method="POST">
       {% csrf_token %}
         <label for="ALGO">Añadir al carrito:</label>
         <tr><th><label for="quantity">Quantity:</label></th><td><select name="quantity" id="quantity" value="None">
