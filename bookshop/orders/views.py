@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from orders import forms
 from catalog.models import Book
 from django.conf import settings
+
+
 def cart_add(request, book_slug):
     """add the book with slug "book_slug" to the
     shopping cart. The number of copies to be bought
@@ -19,8 +21,6 @@ def cart_add(request, book_slug):
 
     if query:
         carro.add(book, query, True)
-        print("Carro en car_add")
-        print(carro)
         carro.save()
         return redirect ('cart_list')
     else:
@@ -29,16 +29,17 @@ def cart_add(request, book_slug):
 
 def cart_list(request):
     #carro = cart.Cart(request)
-    print("Carro en car_list")
     carro = Cart(request)
     items = carro.__iter__()
     total_price = carro.get_total_price()
     return render(request, 'cart.html', context={'items':items, 'total_price':total_price})
 
 
-@login_required
 def cart_remove(request , book_slug):
-    book = Book.objects.filter(slug__exact=book_slug)
+    print("123")
+    book = Book.objects.filter(slug__exact=book_slug)[0]
+    print(book)
     cart = Cart(request)
     cart.remove(book)
+    cart.save()
     return redirect ("cart_list")   # Esto hay que ver

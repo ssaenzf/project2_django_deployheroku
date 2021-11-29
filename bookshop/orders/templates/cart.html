@@ -8,6 +8,7 @@
               <th>Price: {{item.price}}</th>
               <th>Quantity: {{item.quantity}}</th>
               <th>Total Price (€): {{item.total_price}}</th>
+              <th><a href="{% url 'cart_remove' item.slug %}">Remove</a></th>
           </tr>
         {% endfor %}
         <p> Precio total {{ total_price }} </p>

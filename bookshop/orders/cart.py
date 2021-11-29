@@ -30,7 +30,6 @@ class Cart(object):
             # and save it in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
-        self.save()
 
 
     def add(self , book , quantity=1, update_quantity=True):
@@ -61,7 +60,7 @@ class Cart(object):
             # si existe el carro se procede normal ya que si se puede actualizar
             if cart.get(book_id) is not None:
                 if cart[book_id]['quantity'] is not None:
-                    cart[book_id]['quantity'] = cart[book_id]['quantity'] + int(quantity)
+                    cart[book_id]['quantity'] = int(cart[book_id]['quantity']) + int(quantity)
                 else:
                     cart[book_id]['quantity'] = int(quantity)
 
@@ -134,6 +133,7 @@ class Cart(object):
         books = Book.objects.filter(id__in=book_ids)
         for book in books:
             self.cart[str(book.id)]['title'] = book.title
+            self.cart[str(book.id)]['slug'] = book.slug
 
         for item in self.cart.values ():
             # since ’price’ is stored as string cast it to ’decimal ’
