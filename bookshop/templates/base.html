@@ -4,11 +4,10 @@
       <title>
          {% block title %} BookShop {% endblock %}
       </title>
+      <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
    </head>
    <body>
       {% block header %}
-      <p>Header goes here</p>
-      <hr>
       {% endblock %}
       {% block menu %}
       <div class = "topnav">
@@ -20,11 +19,7 @@
       <a href="{% url 'login' %}"> Log In</a>
       {% endif %}
       <a href="{% url 'search' %}">Search</a>
-      {% if cart|__len__ < 1 %}
-      <p> Your cart is emptry </p>
-      {% else %}
-      <a href="{% url 'cart_list' %}">cart.__len__ cart.get_total_price</a>
-      {% endif %}
+  
       <hr>
       {% endblock %}
       </div>
