@@ -11,6 +11,7 @@
       <hr>
       {% endblock %}
       {% block menu %}
+      <div class = "topnav">
       <a href="{% url 'home' %}"> Homepage</a>
       {% if user.is_authenticated %}
       <a href="{% url 'logout' %}"> Log Out</a>
@@ -26,6 +27,7 @@
       {% endif %}
       <hr>
       {% endblock %}
+      </div>
       {% block content %}
 
       <hr>
