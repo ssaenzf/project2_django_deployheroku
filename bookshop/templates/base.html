@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
    <head>
       <title>
-         {% block title %} BookShop {% endblock %}
+         {% block title %} Welcome to our Bookshop {% endblock %}
       </title>
-      <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+      <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
    </head>
    <body>
       {% block header %}
@@ -50,7 +51,7 @@
       {% endif %}
     {% endblock %}
       {% block footer %}
-      <hr>
+      <hr class="footer">
       <p>Footer goes here</p>
       {% endblock %}
    </body>
