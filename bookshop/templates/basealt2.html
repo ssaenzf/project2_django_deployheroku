@@ -19,13 +19,11 @@
       <a href="{% url 'login' %}"> Log In</a>
       {% endif %}
       <a href="{% url 'search' %}">Search</a>
-      {% with total_items=cart|length %}
-      {% if total_items > 0 %}
-      <a href="{% url 'cart_list' %}"> Your cart: {{ total_items }}, ${{ cart.get_total_price }} </a>
+      {% if size > 0 %}
+      <a href="{% url 'cart_list' %}"> Your cart: {{ size }}, ${{ cart.get_total_price }} </a>
       {% else %}
       <p>There are no current items in the cart</p>
       {% endif %}
-      {% endwith %}
       <hr>
       </div>
       {% endblock %}

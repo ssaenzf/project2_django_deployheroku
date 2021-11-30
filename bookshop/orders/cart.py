@@ -154,7 +154,7 @@ class Cart(object):
         quantity = 0
         # Se itera sobre los valores y se ira obteniendo el quantity
         for item in self.cart.values ():
-            quantity = quantity + item['quantity']
+            quantity = int(quantity) + int(item['quantity'])
 
         return quantity
         # endyourcode
