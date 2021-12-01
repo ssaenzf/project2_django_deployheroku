@@ -22,10 +22,10 @@ LOGIN_REDIRECT_URL = '/'
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')  # noqa
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+# DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 CART_SESSION_ID = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['still-ravine-74857.herokuapp.com', '127.0.0.1']
 
 # Application definition

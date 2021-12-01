@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
   {% if form.errors %}
@@ -15,23 +15,32 @@
     {% endif %}
   {% endif %}
 
+  <div class="formSignIn">
+  <h1 class="tituloSignIn">Log In</h1>
+
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <table>
+    <table class="tabla">
       <tr>
-        <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
+        <td class="rowTitle"><strong>{{ form.username.label_tag }}</strong></td>
       </tr>
       <tr>
-        <td>{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td>
+        <td class="rowContent"><br>{{ form.username }}<br><br></td>
+      </tr>
+      <tr>
+        <td class="rowTitle"><strong>{{ form.password.label_tag }}</strong></td>
+      </tr>
+      <tr> 
+        <td class="rowContent"><br>{{ form.password }}<br><br></td>
       </tr>
     </table>
-    <input type="submit" value="login" />
-    <input type="hidden" name="next" value="{{ next }}" />
+    <div class="botonesSignIn">
+      <input type="submit" value="login" class="botonSignIn"/>    
+      <a href="{% url 'password_reset' %}" class="pwdLost">Lost password?</a>
+    </div>
+   <input type="hidden" name="next" value="{{ next }}" />
   </form>
+  </div>
 
-  {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
 {% endblock %}

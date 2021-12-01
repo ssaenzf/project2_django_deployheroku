@@ -2,22 +2,31 @@
 {% load static %}
 {% block content %}
 {% if book_list %}
-<ul>
-    {% for book in book_list %}
-    <li>
-        <h1><a href="{{ book.get_absolute_url }}"> Tittle: {{ book.title }}</a></h1>
-        <img src= "/static/{{ book.path_to_cover_image }}" alt='imagen del libro' >
-        {% if book.author.all %}
-            {% for a in book.author.all %}
-                <p><strong>Author:</strong>{{ a.first_name }} {{ a.last_name }}</p>
-            {% endfor %}
-        {% endif %}
-        <p><strong>Price:</strong> {{book.price }}</p>
-        <p><strong>Score:</strong> {{book.score }}</p>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p> There are not current books matching the search </p>
+<div class="resBusqueda">
+    <h1 class="titleRes">Your search</h1>
+        {% for book in book_list %}
+        <hr class="separador">
+        <div class="resIndividual">
+            <div class="imgLibro">
+                <img src= "/static/{{ book.path_to_cover_image }}" alt='imagen del libro'>
+            </div>
+            <br><br><br><br><br>
+            <div class="contentRes">
+                <h1><a href="{{ book.get_absolute_url }}"> Tittle: {{ book.title }}</a></h1>
+                {% if book.author.all %}
+                    {% for a in book.author.all %}
+                        <p><strong>Author:</strong>{{ a.first_name }} {{ a.last_name }}</p>
+                    {% endfor %}
+                {% endif %}
+                <p><strong>Price:</strong> {{book.price }}</p>
+                <p><strong>Score:</strong> {{book.score }}</p>
+            </div>
+
+        </div>
+        {% endfor %}
+    {% else %}
+    <p> There are not current books matching the search </p>
+</div>
+
 {% endif %}
 {% endblock %}

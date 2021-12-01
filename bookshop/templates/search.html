@@ -1,13 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
    Home
 {% endblock %}
 
 {% block content %}
 
-<form id="buscar" action="{% url 'searchedbook' %}" method="GET">
-    <input type="text" name="q" value="None">
-    <input type="submit" value='submit'/>
-</form>
+<h1 class="searchTitle">Search page</h1>
+
+<div class="searchForm">
+    <form id="buscar" action="{% url 'searchedbook' %}" method="GET">
+        <input type="text" name="q" value="None" class="inputSearch"/>
+        <input type="submit" value='submit' class="botonSearch"/>    
+    </form>
+</div>
+
 
 {% endblock content %}

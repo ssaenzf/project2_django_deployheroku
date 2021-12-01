@@ -1,26 +1,30 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
    Home
 {% endblock %}
 
 {% block content %}
-<h1>Homepage</h1>
-{% if book_score %}
-<p> Estos son los 5 libros con mayor score </p>
-<ul>
-  {% for b in book_score %}
-  <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}
+<h1 class="homeTitle">Homepage</h1>
+<div class="homeContent">
+  {% if book_score %}
+  <p> Estos son los 5 libros con mayor score </p>
+  <ul>
+    {% for b in book_score %}
+    <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  
+  {% if book_score %}
+  <p> Estos son los 5 libros más recientes </p>
+  <ul>
+    {% for b in book_date %}
+    <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
 
-{% if book_score %}
-<p> Estos son los 5 libros más recientes </p>
-<ul>
-  {% for b in book_date %}
-  <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}
 
 {% endblock content %}

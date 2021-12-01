@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+}
+  
+body {
+    margin: 20;
+    font-family: Verdana, Geneva, sans-serif;
+    background-color: rgba(228, 87, 87, 0.4);;
+}
+
+.topnav {
+    margin-top: 15;
+    height: 50px;
+    width: 100%;
+    color: rgb(69, 10, 136);
+}
+
+.topnav a {
+    color: rgb(7, 5, 5);
+    padding: 16px;
+    text-decoration: none;
+    display: inline;
+}
+
+.topnav a:hover {
+    margin-top: 15;
+    background-color: #ddd;
+    color: rgb(138, 31, 31);
+}
+
+.topnav a.home {
+    padding-top: 100px;
+}
+
+.footer{
+    margin-top: 500px;
+}
+
+.infoLibro {
+    margin-top: -300px;
+    margin-left: 225px;
+}
+
+#anyadirCarrito {
+    margin-left: 0px;
+}
+
+.addCart {
+    border-radius: 10px;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    background-color: #8f1915;
+    border-style: none;
+    margin-left: 30px;
+}
+
+#comentarios {
+    background-color: #98ac8d;
+    border-radius: 10px;
+    width: fit-content;
+    position: fixed;
+}
+
+#comentarios p {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.commentSection {
+    margin-top: 150px;
+}
+
+.logIn {
+    display: grid;
+    height: 100%;
+    place-items: center; 
+}
+
+.container {
+    max-width: 440px;
+    padding: 0 20px;
+    margin: 170px auto;
+}
+
+.wrapper {
+    width: 380px;
+    background: #fff;
+    border-radius: 25px;
+    place-items: center;    
+}
+
+.wrapper .titleLogIn {
+    line-height: 80px;
+    background: #8f1915;
+    border-radius: 25px 25px 0px 0px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;    
+}
+
+.wrapper form .row{
+    height: 45px;
+    margin-bottom: 15px;
+    position: relative;
+    text-align: center;
+    width: 300px;
+}
+
+.wrapper form .row input{
+    border-radius: 25px;
+      width: 300px;
+      background: #fff;
+      height: 45px;
+      line-height: 45px;
+      padding: 0 40px 0 10px;
+      transition: .3s ease all;
+}
+
+form .row input:focus{
+	border: 3px solid #0075FF;
+	outline: none;
+	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+}
+
+.buttonSignIn{
+    border-radius: 10px;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    background-color: #8f1915;
+    border-style: none;
+    align-content: center;
+}
+  

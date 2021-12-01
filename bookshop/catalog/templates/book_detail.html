@@ -38,13 +38,18 @@
               <input type="submit" value="Add to cart" class="addCart">
           </form>
     </div>
-    <div class="comentarios">
-    <p class="commentSection"><strong>Comment section</strong></p>
+    <p class="commentSection" onclick="myFunction()"><strong>Comment section</strong></p>
+    <div id="comentarios">
     {% if comments %}
         {% for c in comments.all %}
             <p class="comentario"><strong>{{ c.user.username }} <br></strong>{{ c.msg }} <br> ( {{ c.date }} )</p>
         {% endfor %}
     {% endif %}
     </div>
+    <script>
+        function myFunction(){
+            document.getElementById("comentarios").style.display="block";
+        }
+    </script>
 
 {% endblock %}
