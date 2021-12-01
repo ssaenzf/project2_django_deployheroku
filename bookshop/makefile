@@ -14,7 +14,6 @@ HEROKU = heroku run export SQLITE=1 &
 APP = catalog  orders authentication
 
 server:
-	python3 ./manage.py collectstatic
 	$(CMD) runserver $(DJANGOPORT)
 
 reset_db: clear_db update_db create_super_user
