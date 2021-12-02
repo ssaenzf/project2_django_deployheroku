@@ -217,7 +217,8 @@ body {
     border: black;
     border-style: solid;
     border-width: thin;
-    height: 700px;
+    height: fit-content
+    ;
     width: 600px;
     border-radius: 20px;
 }
@@ -251,6 +252,6 @@ body {
     outline: none;
     background-color: #8f1915;
     border-style: none;
-    margin-left: 250px;
+    margin: auto;
     align-content: center;    
 }

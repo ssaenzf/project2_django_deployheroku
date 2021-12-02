@@ -217,7 +217,7 @@ body {
     border: black;
     border-style: solid;
     border-width: thin;
-    height: 700px;
+    height: 600px;
     width: 600px;
     border-radius: 20px;
 }
@@ -236,21 +236,4 @@ body {
 
 .textoSignUp{
     margin: auto;
-    text-align: none;
-}
-
-.botonSignUp{
-    border-radius: 10px;
-    color: white;
-    padding: 15px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-    background-color: #8f1915;
-    border-style: none;
-    margin-left: 250px;
-    align-content: center;    
 }
