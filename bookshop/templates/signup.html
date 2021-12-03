@@ -5,20 +5,41 @@
    <h1 class ="tituloSignUp">Sign up</h2>
       <form method="post">
         {% csrf_token %}
-        {% for field in form %}
-          <p class="campoSignUp">
-            <p class="tituloCampo">{{ field.label_tag }}</p>
-            <br>
-            <div class="textoSignUp">{{ field }}</div>
-            {% if field.help_text %}
-              <br>
-              <small style="color: grey">{{ field.help_text }}</small>
-            {% endif %}
-            {% for error in field.errors %}
-              <p style="color: red">{{ error }}</p>
-            {% endfor %}
-          </p>
-        {% endfor %}
+        <table class="tablaSignUp">
+          <tr>
+            <td class="rowTitleSU"><strong>{{ form.username.label_tag }}</strong></td>
+          </tr>
+          <tr>
+            <td class="rowContentSU"><br>{{ form.username }}<br><br></td>
+          </tr>
+          <tr>
+            <td class="helpTextSU"><small style="color: grey">{{ form.username.help_text }}</small></td>
+          </tr>
+          <tr>
+            <td class="rowTitleSU"><strong>{{ form.email.label_tag }}</strong></td>
+          </tr>
+          <tr>
+            <td class="rowContentSU"><br>{{ form.email }}<br><br></td>
+          </tr>
+          <tr>
+            <td class="helpTextSU"><small style="color: grey">{{ form.email.help_text }}</small></td>
+          </tr>
+          <tr>
+            <td class="rowTitleSU"><strong>{{ form.password1.label_tag }}</strong></td>
+          </tr>
+          <tr> 
+            <td class="rowContentSU"><br>{{ form.password1 }}<br><br></td>
+          </tr>
+          <tr>
+            <td class="helpTextSU"><small style="color: grey">{{ form.password1.help_text }}</small></td>
+          </tr>
+          <tr>
+            <td class="rowTitleSU"><strong>{{ form.password2.label_tag }}</strong></td>
+          </tr>
+          <tr>
+            <td class="rowContentSU"><br>{{ form.password2 }}<br><br></td>
+          </tr>
+        </table>
         <button type="submit" class="botonSignUp">Sign up</button>
       </form>
   </div>
