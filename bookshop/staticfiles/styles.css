@@ -37,6 +37,10 @@ body {
     margin-top: 500px;
 }
 
+.center {
+    text-align: center;
+}
+
 .pagAnterior {
     border-radius: 10px;
     color: black;
@@ -79,10 +83,6 @@ body {
 .pagSiguiente:hover{
     background-color: #8f1915;
     color:white; 
-}
-
-.pagination {
-    margin-left: 500px;
 }
 
 .infoLibro {

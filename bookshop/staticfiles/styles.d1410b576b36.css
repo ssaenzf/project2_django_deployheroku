@@ -41,7 +41,21 @@ body {
     text-align: center;
 }
 
-.pagAnterior {
+.pagination{
+    display: inline-block;
+}
+
+.pagination a{
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+/*.pagAnterior {
     border-radius: 10px;
     color: black;
     padding: 15px 16px;
@@ -83,7 +97,7 @@ body {
 .pagSiguiente:hover{
     background-color: #8f1915;
     color:white; 
-}
+}*/
 
 .infoLibro {
     margin-top: -300px;
