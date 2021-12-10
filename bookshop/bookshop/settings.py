@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eu09(ilk6@4sfdofb=b_2ht@vad*$e
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 CART_SESSION_ID = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['still-ravine-74857.herokuapp.com', '127.0.0.1']
 
 # Application definition

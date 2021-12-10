@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from orders.forms import OrderCreateForm
 from catalog.models import Book
 from django.conf import settings
-
+from .models import Order, OrderItem
 
 def cart_add(request, book_slug):
     """add the book with slug "book_slug" to the
@@ -16,13 +16,14 @@ def cart_add(request, book_slug):
     carro = Cart(request)
     #cogemos el libro con el slug que se le pasa a la funcion
     book = get_object_or_404(Book, slug=book_slug)
-    query = None
-    query = request.POST.get('quantity')
+    if request.method == 'post':
 
-    if query:
-        carro.add(book, query, True)
-        carro.save()
-        return redirect ('cart_list')
+        if form.is_valid():
+            quantity = form.cleaned_data['quantity']
+            print(quantity)
+            carro.add(book, quantity, True)
+            carro.save()
+            return redirect ('cart_list')
     else:
         return redirect(book.get_absolute_url)
 
@@ -55,12 +56,12 @@ def order_create(request):
         if form.is_valid():
             # Se obtiene y guarda el objeto order
             order = Order()
-            order.first_name = form.cleaned_data['First_name']
-            order.last_name = form.cleaned_data['Last_name']
-            order.email = form.cleaned_data['Email']
-            order.address = form.cleaned_data['Address']
-            order.postal_code = form.cleaned_data['Postal_code']
-            order.city = form.cleaned_data['City']
+            order.first_name = form.cleaned_data['first_name']
+            order.last_name = form.cleaned_data['last_name']
+            order.email = form.cleaned_data['email']
+            order.address = form.cleaned_data['address']
+            order.postal_code = form.cleaned_data['postal_code']
+            order.city = form.cleaned_data['city']
             order.paid = True
             order.save()
             # Se obtienen los order items del carro y se guardan
@@ -69,16 +70,16 @@ def order_create(request):
             for item in items:
                 order_item = OrderItem()
                 order_item.order = order
-                order_item.price = order['price']
-                order_item.quantity = order['quantity']
-                order_item.book = Book.objects.filter(slug__exact=item['book_slug'])[0]
+                order_item.price = item['price']
+                order_item.quantity = item['quantity']
+                order_item.book = Book.objects.filter(slug__exact=item['slug'])[0]
                 order_item.save()
             # redirect to a new URL:
             carro.clear()
             context = {
                 'order_number': order.id,
             }
-            return render('created.html', context)
+            return render(request, 'created.html', context)
 
     # If this is a GET (or any other method) create the default form.
     else:

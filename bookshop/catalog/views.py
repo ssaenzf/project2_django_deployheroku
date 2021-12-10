@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Book, Comment, Author
 from django.shortcuts import get_object_or_404
-
+from orders.forms import CartAddBookForm
 
 def home(request):
     """
@@ -77,4 +77,5 @@ def book_detail_view(request, slug):
     """
     book = get_object_or_404(Book, slug=slug)
     comments = Comment.objects.filter(book=book)
-    return render(request, 'book_detail.html', context={'book': book, 'comments': comments}) # noqa
+    form = CartAddBookForm()
+    return render(request, 'book_detail.html', context={'book': book, 'comments': comments, 'form': form}) # noqa
