@@ -11,7 +11,7 @@ CMD = python3 manage.py
 HEROKU = heroku run export SQLITE=1 &
 # Add applications to APP variable as they are
 # added to settings.py file
-APP = catalog  orders authentication
+APP = catalog orders authentication
 
 server:
 	python3 ./manage.py collectstatic

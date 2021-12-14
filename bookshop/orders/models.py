@@ -44,4 +44,5 @@ class OrderItem(models.Model):
     # Cada vez que guarda order item, se guardan estos order items en una lista de items
     # para su order correspondiente con el fin de satisfacer el test
     def save(self, *args, **kwargs):
-        return super(OrderItem, self).save(*args, **kwargs)
+        if self.quantity > 0 and self.quantity < 21 :
+            return super(OrderItem, self).save(*args, **kwargs)

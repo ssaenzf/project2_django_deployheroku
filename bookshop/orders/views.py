@@ -2,12 +2,12 @@ from django.shortcuts import get_object_or_404, render, redirect
 #from . import cart
 from .cart import Cart
 from django.contrib.auth.decorators import login_required
-from orders.forms import OrderCreateForm
+from orders.forms import CartAddBookForm, OrderCreateForm
 from catalog.models import Book
 from django.conf import settings
 from .models import Order, OrderItem
 
-def cart_add(request, book_slug):
+def cart_add(request, slug):
     """add the book with slug "book_slug" to the
     shopping cart. The number of copies to be bought
     may be obtained from the form CartAddBookForm """
@@ -15,12 +15,11 @@ def cart_add(request, book_slug):
     #carro = cart.Cart(request)
     carro = Cart(request)
     #cogemos el libro con el slug que se le pasa a la funcion
-    book = get_object_or_404(Book, slug=book_slug)
-    if request.method == 'post':
-
+    book = get_object_or_404(Book, slug=slug)
+    if request.method == 'POST':
+        form = CartAddBookForm(request.POST)
         if form.is_valid():
             quantity = form.cleaned_data['quantity']
-            print(quantity)
             carro.add(book, quantity, True)
             carro.save()
             return redirect ('cart_list')
@@ -36,20 +35,16 @@ def cart_list(request):
     return render(request, 'cart.html', context={'items':items, 'total_price':total_price})
 
 
-def cart_remove(request , book_slug):
-    print("123")
-    book = Book.objects.filter(slug__exact=book_slug)[0]
-    print(book)
+def cart_remove(request , slug):
+    book = Book.objects.filter(slug__exact=slug)[0]
     cart = Cart(request)
     cart.remove(book)
     cart.save()
     return redirect ("cart_list")   # Esto hay que ver
 
 def order_create(request):
-    print("bien")
     # If this is a POST request then process the Form data
     if request.method == 'POST':
-        print("mal")
         form = OrderCreateForm(request.POST)
 
         # Check if the form is valid:
@@ -87,5 +82,4 @@ def order_create(request):
     context = {
         'form': form,
     }
-    print("bien3")
     return render(request, 'create.html', context=context)

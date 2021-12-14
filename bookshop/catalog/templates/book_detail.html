@@ -11,7 +11,7 @@
         {% endif %}
         <p><strong>Price:</strong> {{book.price }}</p>
         <p><strong>Score:</strong> {{book.score }}</p>
-        <form id = "anyadirCarrito" action="{% url 'cart_add' book_slug=book.slug %}" method="post">
+        <form id = "anyadirCarrito" action="{% url 'cart_add' slug=book.slug %}" method="post">
           {% csrf_token %}
           <table>
           {{ form.as_table }}
