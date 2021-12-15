@@ -8,7 +8,7 @@
 <h1 class="homeTitle">Homepage</h1>
 <div class="homeContent">
   {% if book_score %}
-  <p> Estos son los 5 libros con mayor score </p>
+  <p> Most popular </p>
   <ul>
     {% for b in book_score %}
     <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
@@ -17,7 +17,7 @@
   {% endif %}
   
   {% if book_score %}
-  <p> Estos son los 5 libros más recientes </p>
+  <p> New Releases </p>
   <ul>
     {% for b in book_date %}
     <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>

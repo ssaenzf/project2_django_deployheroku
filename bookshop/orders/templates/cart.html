@@ -22,7 +22,7 @@
         {% endfor %}
     </table>
     <p> Precio total {{ total_price }} </p>
-    <a href="{% url 'order_create' %}">Checkout</a>
+    <a href="{% url 'order_create' %}" class="botonCheckOut">Checkout</a>
     {% else %}
     <p> No hay elementos en el carrito </p>
     {% endif %}

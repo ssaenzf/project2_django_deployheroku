@@ -37,6 +37,10 @@ body {
     margin-top: 500px;
 }
 
+.tablaTitulo{
+    text-align: left;
+}
+
 .center {
     text-align: center;
 }
@@ -350,4 +354,54 @@ body {
 .botonRemove:hover{
     background-color: #8f1915;
     color:white;
+}
+
+.botonCheckOut{
+    border-radius: 10px;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    background-color: #8f1915;
+    border-style: none;
+    align-content: center; 
+    margin-top: 15px;
+}
+
+.checkOut {
+    margin-left: 60px;
+}
+
+.botonSubmit {
+    border-radius: 10px;
+    color: black;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    border-style: solid;
+    border-color: #8f1915;
+    background-color: transparent;
+    border-width: thin;
+    margin-left: 60px;
+    align-content: left; 
+    transition-duration: 0.2s;
+    height: fit-content;
+    margin-top: 15px;
+}
+
+.botonSubmit:hover{
+    background-color: #8f1915;
+    color:white;
+}
+
+.chkOutP{
+    margin-left: 60px;
 }

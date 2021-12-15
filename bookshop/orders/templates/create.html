@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Checkout:</h1>
-  <p> Shipping addres </p>
-  <form action="" method="post">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit">
-  </form>
+  <h1 class="checkTitle">Checkout</h1>
+  <p class="chkOutP"> Shipping addres </p>
+  <div class="checkOut">
+    <form action="" method="post">
+      {% csrf_token %}
+      <table>
+      {{ form.as_table }}
+      </table>
+      <input type="submit" value="Place order" class="botonSubmit">
+    </form>
+  </div>
 {% endblock %}
