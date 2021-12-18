@@ -122,6 +122,7 @@ body {
 }
 
 .center {
+    text-align: center;
 }
 
 .pagAnterior {
@@ -321,6 +322,7 @@ body {
 }
 
 .resBusqueda {
+    margin: auto;
     width: 1500px;
     height:3000px;
 }
@@ -334,6 +336,7 @@ body {
 }
 
 .imgLibro{
+    margin-left: 20px;
     width: fit-content;
 }
 

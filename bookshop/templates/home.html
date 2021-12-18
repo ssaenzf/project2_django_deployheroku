@@ -5,24 +5,26 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="homeTitle">Homepage</h1>
-<div class="homeContent">
+<h1 class="homeTitle">Welcome to our Bookshop</h1>
+<div class="dropdwn1">
   {% if book_score %}
-  <p> Most popular </p>
-  <ul>
-    {% for b in book_score %}
-    <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
-    {% endfor %}
-  </ul>
+  <button class = "dropbtn1">Most popular</button>
+    <div class="dropdwn1-content">
+      {% for b in book_score %}
+      <a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a>
+      {% endfor %}
+    </div>
   {% endif %}
-  
+</div>
+
+<div class="dropdwn2">
   {% if book_score %}
-  <p> New Releases </p>
-  <ul>
-    {% for b in book_date %}
-    <li><a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a></li>
-    {% endfor %}
-  </ul>
+  <button class = "dropbtn2">New Releases</button>
+    <div class="dropdwn2-content">
+      {% for b in book_date %}
+      <a href="{{ b.get_absolute_url }}"> Tittle: {{ b.title }}</a>
+      {% endfor %}
+    </div>
   {% endif %}
 </div>
 

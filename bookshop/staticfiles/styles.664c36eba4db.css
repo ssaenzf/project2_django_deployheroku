@@ -33,8 +33,8 @@ body {
     padding-top: 100px;
 }
 
-.dropbtn1{
-    background-color: rgb(138, 31, 31);
+.dropbtn{
+    background-color: #4CAF50;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -69,48 +69,8 @@ body {
     display: block;
 }
 
-.dropdwn1:hover .dropbtn1{
-    background-color: rgb(138, 31, 31);
-}
-
-.dropbtn2{
-    background-color: rgb(138, 31, 31);
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdwn2{
-    position: relative;
-    display: inline-block;
-}
-
-.dropdwn2-content{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdwn2-content a{
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdwn2-content a:hover{background-color: #f1f1f1;}
-
-.dropdwn2:hover .dropdwn2-content{
-    display: block;
-}
-
-.dropdwn2:hover .dropbtn2{
-    background-color: rgb(138, 31, 31);
+.dropdwn1:hover .dropbtn{
+    background-color: #3e8e41;
 }
 
 .footer{
@@ -122,6 +82,7 @@ body {
 }
 
 .center {
+    text-align: center;
 }
 
 .pagAnterior {
@@ -316,11 +277,18 @@ body {
     width: 400px;
 }
 
+@media only screen and (min-width: 700px){
+    .resBusqueda{width: 10%;}
+    .searchTitle{width: 10%;}
+}
+
 .titleRes{
-    margin:auto;
+    margin-left: 20px;
+    text-align: center;
 }
 
 .resBusqueda {
+    margin: auto;
     width: 1500px;
     height:3000px;
 }
@@ -334,6 +302,7 @@ body {
 }
 
 .imgLibro{
+    margin-left: 20px;
     width: fit-content;
 }
 
