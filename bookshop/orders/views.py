@@ -1,20 +1,21 @@
 from django.shortcuts import get_object_or_404, render, redirect
-#from . import cart
+# from . import cart
 from .cart import Cart
 from django.contrib.auth.decorators import login_required
 from orders.forms import CartAddBookForm, OrderCreateForm
 from catalog.models import Book
-from django.conf import settings
+# from django.conf import settings
 from .models import Order, OrderItem
 
+
+@login_required
 def cart_add(request, slug):
     """add the book with slug "book_slug" to the
     shopping cart. The number of copies to be bought
     may be obtained from the form CartAddBookForm """
 
-    #carro = cart.Cart(request)
     carro = Cart(request)
-    #cogemos el libro con el slug que se le pasa a la funcion
+    # cogemos el libro con el slug que se le pasa a la funcion
     book = get_object_or_404(Book, slug=slug)
     if request.method == 'POST':
         form = CartAddBookForm(request.POST)
@@ -22,25 +23,27 @@ def cart_add(request, slug):
             quantity = form.cleaned_data['quantity']
             carro.add(book, quantity, True)
             carro.save()
-            return redirect ('cart_list')
+            return redirect('cart_list')
     else:
         return redirect(book.get_absolute_url)
 
 
+@login_required
 def cart_list(request):
-    #carro = cart.Cart(request)
     carro = Cart(request)
     items = carro.__iter__()
     total_price = carro.get_total_price()
-    return render(request, 'cart.html', context={'items':items, 'total_price':total_price})
+    return render(request, 'cart.html', context={'items': items, 'total_price': total_price})  # noqa
 
 
-def cart_remove(request , slug):
+@login_required
+def cart_remove(request, slug):
     book = Book.objects.filter(slug__exact=slug)[0]
     cart = Cart(request)
     cart.remove(book)
     cart.save()
-    return redirect ("cart_list")   # Esto hay que ver
+    return redirect("cart_list")   # Esto hay que ver
+
 
 def order_create(request):
     # If this is a POST request then process the Form data
@@ -67,7 +70,7 @@ def order_create(request):
                 order_item.order = order
                 order_item.price = item['price']
                 order_item.quantity = item['quantity']
-                order_item.book = Book.objects.filter(slug__exact=item['slug'])[0]
+                order_item.book = Book.objects.filter(slug__exact=item['slug'])[0]  # noqa
                 order_item.save()
             # redirect to a new URL:
             carro.clear()

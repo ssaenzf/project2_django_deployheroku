@@ -22,11 +22,12 @@ LOGIN_REDIRECT_URL = '/'
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh&=')  # noqa
-# DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 CART_SESSION_ID = 'cart'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['still-ravine-74857.herokuapp.com', '127.0.0.1']
+# DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+# url: https://fierce-mesa-09353.herokuapp.com/
+ALLOWED_HOSTS = ['fierce-mesa-09353.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -40,11 +41,10 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'orders.apps.OrdersConfig',
     'authentication.apps.AuthenticationConfig',
-    #'debug_toolbar'
 ]
 
 MIDDLEWARE = [
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,7 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'orders.context_preprocesors.cart', # added
+                'orders.context_preprocesors.cart',  # added
             ],
         },
     },
@@ -136,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 
@@ -152,7 +152,7 @@ STATIC_URL = '/static/'
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_DIR = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [STATIC_PATH,]
+STATICFILES_DIRS = [STATIC_PATH, ]
 INTERNAL_IPS = [
     '127.0.0.1'
 ]

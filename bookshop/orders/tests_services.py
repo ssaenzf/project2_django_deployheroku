@@ -8,10 +8,10 @@ from django.contrib.auth.models import User
 
 ###################
 # You may modify the following variables
-from catalog.models import Author as Author
+from catalog.models import Author as Author  # noqa
 from catalog.models import Book as Book
-from catalog.models import Comment as Comment
-from .models import Order as Order
+from catalog.models import Comment as Comment  # noqa
+from .models import Order as Order  # noqa
 from .models import OrderItem as OrderItem
 from .forms import OrderCreateForm as OrderCreateForm
 from .forms import CartAddBookForm as CartAddBookForm
@@ -22,7 +22,7 @@ CARTADD_SERVICE = 'cart_add'
 CARTLIST_SERVICE = 'cart_list'
 CARTREMOVE_SERVICE = 'cart_remove'
 LOGIN_SERVICE = "login"
-ORDERSERVICE='order_create'
+ORDERSERVICE = 'order_create'
 ORDERCOMPLETE = 'Your order has been successfully completed.'
 
 FIRSTNAME = 'first_name'
@@ -50,12 +50,8 @@ class ServiceBaseTest(TestCase):
             CITY: 'Piedradura',
             ZIP: '28049',
         }
-        i=0
-        self.user = {"username": "user_%d" % i,
-                "password": "trampolin_%d" % i,
-                "first_name": "name_%d" % i,
-                "last_name": "last_%d" % i,
-                "email": "email_%d@gmail.com" % i}
+        i = 0
+        self.user = {"username": "user_%d" % i, "password": "trampolin_%d" % i, "first_name": "name_%d" % i, "last_name": "last_%d" % i, "email": "email_%d@gmail.com" % i}  # noqa
         User.objects.create_user(**(self.user))
 
     def tearDown(self):
@@ -100,16 +96,16 @@ class OrderTests(ServiceBaseTest):
         while old.minute > 58:
             time.sleep(10)
             old = timezone.localtime(order.created)
-        self.assertEqual(old.year,now.year)
-        self.assertEqual(old.month,now.month)
-        self.assertEqual(old.day,now.day)
-        self.assertEqual(old.hour,now.hour)
+        self.assertEqual(old.year, now.year)
+        self.assertEqual(old.month, now.month)
+        self.assertEqual(old.day, now.day)
+        self.assertEqual(old.hour, now.hour)
 
         old = timezone.localtime(order.created)
-        self.assertEqual(old.year,now.year)
-        self.assertEqual(old.month,now.month)
-        self.assertEqual(old.day,now.day)
-        self.assertEqual(old.hour,now.hour)
+        self.assertEqual(old.year, now.year)
+        self.assertEqual(old.month, now.month)
+        self.assertEqual(old.day, now.day)
+        self.assertEqual(old.hour, now.hour)
 
 
 class CartTestServices(ServiceBaseTest):
@@ -151,7 +147,7 @@ class CartTestServices(ServiceBaseTest):
         # after login session user should exists
         self.assertTrue(response.context['user'].is_active)
 
-        #add items to the cart
+        # add items to the cart
         self.client.post(
             reverse(CARTADD_SERVICE, kwargs={'slug': book.slug}),
             data={'quantity': UNITS5}, follow=True)
@@ -191,7 +187,7 @@ class CartTestServices(ServiceBaseTest):
         # after login session user should exists
         self.assertTrue(response.context['user'].is_active)
 
-        #add items to the cart
+        # add items to the cart
         response = self.client.post(
             reverse(CARTADD_SERVICE, kwargs={'slug': book.slug}),
             data={'quantity': UNITS5}, follow=True)
@@ -230,7 +226,7 @@ class CartTestServices(ServiceBaseTest):
         # after login session user should exists
         self.assertTrue(response.context['user'].is_active)
 
-        #add items to the cart
+        # add items to the cart
         self.client.post(
             reverse(CARTADD_SERVICE, kwargs={'slug': book.slug}),
             data={'quantity': UNITS5}, follow=True)
@@ -251,8 +247,7 @@ class CartTestServices(ServiceBaseTest):
         self.assertEqual(cart['price'], bookl.price)
 
         # List item
-        response = self.client.get(reverse(CARTLIST_SERVICE),
-            follow=True)
+        response = self.client.get(reverse(CARTLIST_SERVICE), follow=True)
         # get cart dictionary
         request = response.wsgi_request
         cart = Cart(request).cart
@@ -286,7 +281,7 @@ class OrderItemTests(ServiceBaseTest):
         # after login session user should exists
         self.assertTrue(response.context['user'].is_active)
 
-        #add items to the cart
+        # add items to the cart
         self.client.post(
             reverse(CARTADD_SERVICE, kwargs={'slug': book.slug}),
             data={'quantity': UNITS5}, follow=True)
@@ -296,12 +291,12 @@ class OrderItemTests(ServiceBaseTest):
 
         # get cart object
         request = response.wsgi_request
-        cart = Cart(request).cart
+        cart = Cart(request).cart  # noqa
 
         # checkout
         response = self.client.post(
             reverse(ORDERSERVICE),
-            data = self.orderFormDict,
+            data=self.orderFormDict,
             follow=True
         )
         self.assertIn(ORDERCOMPLETE, self.decode(response.content))

@@ -23,8 +23,9 @@ class AdditionalTests(TestCase):
 
     def test_book_score(self):
         """
-        Test para comprobar que si introducimos libros con score incorrectos estos
-        se actualizan a scores correctos 
+        Test para comprobar que si introducimos libros con score
+        incorrectos estos
+        se actualizan a scores correctos
         AUTOR: Santos Saenz
         """
         faker = Faker()
@@ -62,17 +63,16 @@ class AdditionalTests(TestCase):
 
     def test_home_page(self):
         """
-        Test para comprobar vista del home page 
+        Test para comprobar vista del home page
         AUTOR: Santos Saenz
         """
         self.client = Client()
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'home.html')
 
-
     def test_search_page(self):
         """
-        Test para comprobar vista del search page 
+        Test para comprobar vista del search page
         AUTOR: Santos Saenz
         """
         self.client = Client()

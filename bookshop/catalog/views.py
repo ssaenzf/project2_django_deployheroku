@@ -4,6 +4,7 @@ from .models import Book, Comment, Author
 from django.shortcuts import get_object_or_404
 from orders.forms import CartAddBookForm
 
+
 def home(request):
     """
     Esta función implementa la vista de la pagina

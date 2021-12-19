@@ -7,18 +7,19 @@
 #
 # execute python manage.py  populate
 #
-# use module Faker generator to generate data (https://zetcode.com/python/faker/)
+# use module Faker generator to generate data (
+# https://zetcode.com/python/faker/)
 import os
 
 from django.core.management.base import BaseCommand
 from catalog.models import (Author, Book, Comment)
 from django.contrib.auth.models import User
 from faker import Faker
-from decimal import Decimal
+# from decimal import Decimal
 # define STATIC_PATH in settings.py
 from bookshop.settings import STATIC_PATH
 from PIL import Image, ImageDraw, ImageFont
-from django.utils.timezone import make_aware
+# from django.utils.timezone import make_aware
 
 
 FONTDIR = "/usr/share/fonts/truetype/freefont/FreeMono.ttf"
@@ -28,6 +29,7 @@ FONTDIR = "/usr/share/fonts/truetype/freefont/FreeMono.ttf"
 #
 
 faker = Faker()
+
 
 class Command(BaseCommand):
     # helps and arguments shown when command python manage.py help populate
@@ -50,7 +52,6 @@ class Command(BaseCommand):
         else:
             self.font = \
                 "/usr/share/fonts/truetype/freefont/FreeMono.ttf"
-
 
         self.NUMBERUSERS = 20
         self.NUMBERBOOKS = 30
@@ -76,23 +77,20 @@ class Command(BaseCommand):
         Book.objects.all().delete()
         Comment.objects.all().delete()
 
-
     def user(self):
         id = 100
-        for i in range (self.NUMBERUSERS):
-            user = User(id=id+i,username=faker.name(),
+        for i in range(self.NUMBERUSERS):
+            user = User(id=id+i, username=faker.name(),
                         password=faker.password())
             user.save()
 
-
     def author(self):
-        for i in range (self.NUMBERAUTHORS):
+        for i in range(self.NUMBERAUTHORS):
             author = Author()
             author.id = i
             author.first_name = faker.first_name()
             author.last_name = faker.last_name()
             author.save()
-
 
     def cover(self, book):
         """create fake cover image.
@@ -112,10 +110,9 @@ class Command(BaseCommand):
             book.author.all()[0])[:15], font=fnt, fill=(255, 255, 0))
         img.save(os.path.join(STATIC_PATH, book.path_to_cover_image))
 
-
     def book(self):
         isbn = 1000000000000
-        for i in range (self.NUMBERBOOKS):
+        for i in range(self.NUMBERBOOKS):
             book = Book()
             book.id = i
             book.title = faker.name()
@@ -124,7 +121,7 @@ class Command(BaseCommand):
             book.number_copies_stock = faker.random_int(min=1, max=20)
             book.date = faker.past_datetime()
             book.score = faker.random_int(0, 10)
-            author = Author.objects.get(id=faker.random_int(0, self.NUMBERAUTHORS - 1))
+            author = Author.objects.get(id=faker.random_int(0, self.NUMBERAUTHORS - 1))  # noqa
             author.save()
             book.save()
             book.author.add(author)
@@ -134,12 +131,11 @@ class Command(BaseCommand):
             self.cover(book)
             book.save()
 
-
     def comment(self):
-        for i in range (self.NUMBERCOMMENTS):
+        for i in range(self.NUMBERCOMMENTS):
             comment = Comment()
-            comment.book = Book.objects.get(id=faker.random_int(0, self.NUMBERBOOKS - 1))
+            comment.book = Book.objects.get(id=faker.random_int(0, self.NUMBERBOOKS - 1))  # noqa
             comment.date = faker.past_datetime()
             comment.msg = faker.text()
-            comment.user = User.objects.get(id=faker.random_int(100, 100 + self.NUMBERUSERS - 1))
+            comment.user = User.objects.get(id=faker.random_int(100, 100 + self.NUMBERUSERS - 1))  # noqa
             comment.save()

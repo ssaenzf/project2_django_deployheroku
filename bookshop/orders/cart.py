@@ -5,8 +5,7 @@ from catalog.models import Book
 
 class Cart(object):
 
-
-    def __init__(self , request):
+    def __init__(self, request):
         """
         Initialize the cart.
         if request.session[settings.CART_SESSION_ID]
@@ -31,8 +30,7 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-
-    def add(self , book , quantity=1, update_quantity=True):
+    def add(self, book, quantity=1, update_quantity=True):
         """
         Add a book to the cart or update quantity if
         book exists. Note , use strings as keys of the
@@ -56,24 +54,24 @@ class Cart(object):
         cart = self.session.get(settings.CART_SESSION_ID)
         # Si esta activado actualzar la nueva quantity se sumará a la antigua
         # quantity
-        if update_quantity == True:
-            # si existe el carro se procede normal ya que si se puede actualizar
+        if update_quantity is True:
+            # si existe el carro se procede normal ya que si
+            #  se puede actualizar
             if cart.get(book_id) is not None:
                 if cart[book_id]['quantity'] is not None:
-                    cart[book_id]['quantity'] = int(cart[book_id]['quantity']) + int(quantity)
+                    cart[book_id]['quantity'] = int(cart[book_id]['quantity']) + int(quantity)  # noqa
                 else:
                     cart[book_id]['quantity'] = int(quantity)
 
                 cart[book_id]['price'] = str(book.price)
             else:
-                cart[book_id] = {'quantity': quantity, 'price': str(book.price)}
+                cart[book_id] = {'quantity': quantity, 'price': str(book.price)}  # noqa
         else:
             cart[book_id] = {'quantity': quantity, 'price': str(book.price)}
 
         self.cart = cart
         # end of your code goes here
         self.save()
-
 
     def save(self):
         # update the session cart
@@ -88,8 +86,7 @@ class Cart(object):
         # that it has been modified.
         self.session.modified = True
 
-
-    def remove(self , book):
+    def remove(self, book):
         """
         Remove a book from the cart.
         """
@@ -104,7 +101,7 @@ class Cart(object):
         if cart[book_id]:
             del cart[book_id]
         else:
-            printf("Se esta intentando eliminar un libro que no existe")
+            print("Se esta intentando eliminar un libro que no existe")
 
         # Se guarda la copia de cart modificada en la sesion
         self.cart = cart
@@ -112,11 +109,11 @@ class Cart(object):
         self.save()
         # endyourcode
 
-
     def __iter__(self):
         """
         Iterate over the items (books IDs) in the cart
-        and get the books from the database. This function is used by thefor loop.
+        and get the books from the database.
+        This function is used by thefor loop.
         for item in self.cart:
             Note: here we add to each item saved in self.
             cart and object
@@ -135,12 +132,11 @@ class Cart(object):
             self.cart[str(book.id)]['title'] = book.title
             self.cart[str(book.id)]['slug'] = book.slug
 
-        for item in self.cart.values ():
+        for item in self.cart.values():
             # since ’price’ is stored as string cast it to ’decimal ’
             item['price'] = float(item['price'])
-            item['total_price'] = float(Decimal(item['price']) * int(item['quantity']))
+            item['total_price'] = float(Decimal(item['price']) * int(item['quantity']))  # noqa
             yield item
-
 
     def __len__(self):
         """
@@ -153,12 +149,11 @@ class Cart(object):
         # your code goes here
         quantity = 0
         # Se itera sobre los valores y se ira obteniendo el quantity
-        for item in self.cart.values ():
+        for item in self.cart.values():
             quantity = int(quantity) + int(item['quantity'])
 
         return quantity
         # endyourcode
-
 
     def get_total_price(self):
         """
@@ -167,12 +162,11 @@ class Cart(object):
         """
         # your code goes here
         price = 0
-        for item in self.cart.values ():
+        for item in self.cart.values():
             price = price + (Decimal(item['price']) * int(item['quantity']))
 
         return price
         # endyourcode
-
 
     def clear(self):
         # remove cart from session

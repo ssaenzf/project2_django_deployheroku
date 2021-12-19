@@ -9,4 +9,3 @@ class SearchBookForm(forms.Form):
     """
 
     name = forms.CharField(help_text="Enter a book title or an author", required=False) # noqa
-       

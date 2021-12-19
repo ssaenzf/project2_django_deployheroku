@@ -40,7 +40,7 @@ def account_activation_sent(request):
     """
     Esta función implementa la vista de la pagina
     account_activation_sent.html
-    que solo se redirigirá a ella si la cuenta se 
+    que solo se redirigirá a ella si la cuenta se
     ha creado correctamente
     AUTOR: Santos Saenz
     """
