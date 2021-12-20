@@ -32,5 +32,28 @@ catalog/models.py                            44      0   100%
 catalog/urls.py                               4      0   100%
 catalog/views.py                             40      0   100%
 -----------------------------------------------------------------------
-TOTAL                                       191      1    99%
+TOTAL        
+
+
+-ORDERS
+Name                                              Stmts   Miss  Cover   Missing
+-------------------------------------------------------------------------------
+orders/__init__.py                                    0      0   100%
+orders/admin.py                                       1      0   100%
+orders/apps.py                                        4      0   100%
+orders/cart.py                                       57      3    95%   64, 70, 104
+orders/context_preprocesors.py                        3      0   100%
+orders/forms.py                                      10      0   100%
+orders/migrations/0001_initial.py                     6      0   100%
+orders/migrations/0002_alter_orderitem_order.py       5      0   100%
+orders/migrations/__init__.py                         0      0   100%
+orders/models.py                                     34      0   100%
+orders/tests.py                                       3      0   100%
+orders/tests_cart.py                                 75      0   100%
+orders/tests_models.py                               33      0   100%
+orders/tests_services.py                            159     16    90%   79-81, 94-108
+orders/urls.py                                        4      0   100%
+orders/views.py                                      56      4    93%   28, 84-88
+-------------------------------------------------------------------------------
+TOTAL                                 191      1    99%
 
