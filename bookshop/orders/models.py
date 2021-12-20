@@ -4,7 +4,10 @@ from django.utils import timezone
 
 
 class Order(models.Model):
-
+    """
+    Model representing an order.
+    AUTOR: Santos Saenz
+    """
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254, help_text='Required. Inform a valid email address.')  # noqa
@@ -32,7 +35,10 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-
+    """
+    Model representing an order item.
+    AUTOR: Santos Saenz
+    """
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')  # noqa
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     price = models.DecimalField(null=False, max_digits=7, decimal_places=2)

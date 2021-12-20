@@ -10,10 +10,11 @@ from .models import Order, OrderItem
 
 @login_required
 def cart_add(request, slug):
-    """add the book with slug "book_slug" to the
-    shopping cart. The number of copies to be bought
-    may be obtained from the form CartAddBookForm """
-
+    """
+    Esta función añade el libro con slug
+    "slug" al carrito.
+    AUTOR: Carolina Monedero
+    """
     carro = Cart(request)
     # cogemos el libro con el slug que se le pasa a la funcion
     book = get_object_or_404(Book, slug=slug)
@@ -30,6 +31,12 @@ def cart_add(request, slug):
 
 @login_required
 def cart_list(request):
+    """
+    Esta función implementa la vista de la pagina
+    cart.html pasandole las variables items,
+    y total_price como contexto a la plantilla
+    AUTOR: Carolina Monedero
+    """
     carro = Cart(request)
     items = carro.__iter__()
     total_price = carro.get_total_price()
@@ -38,6 +45,11 @@ def cart_list(request):
 
 @login_required
 def cart_remove(request, slug):
+    """
+    Esta función elimina un libro con slug
+    "slug" del carrito.
+    AUTOR: Santos Saenz
+    """
     book = Book.objects.filter(slug__exact=slug)[0]
     cart = Cart(request)
     cart.remove(book)
@@ -46,6 +58,12 @@ def cart_remove(request, slug):
 
 
 def order_create(request):
+    """
+    Esta función implementa la vista de la pagina
+    create.html pasandole la variable form
+    como contexto a la plantilla.
+    AUTOR: Santos Saenz
+    """
     # If this is a POST request then process the Form data
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)

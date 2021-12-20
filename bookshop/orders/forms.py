@@ -26,6 +26,13 @@ CHOICES = (
 
 
 class CartAddBookForm(forms.Form):
+    """
+    Esta clase define el formulario
+    usado para añadir un libro
+    al carrito
+    AUTOR: Santos Saenz
+    """
+
     quantity = forms.IntegerField()
 
 
@@ -47,6 +54,12 @@ class OrderCreateForm(forms.Form):
 
 
 class OrderCreateForm(ModelForm):
+    """
+    Esta clase define el formulario
+    usado para crear un pedido
+    AUTOR: Santos Saenz
+    """
+    
     class Meta:
         model = Order
         fields = ['first_name', 'last_name', 'email', 'address', 'postal_code', 'city']  # noqa
